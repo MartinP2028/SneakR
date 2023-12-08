@@ -3,7 +3,9 @@
     <div>
       <Navbar />
       <Searchbar />
-      <ListSneakers v-for="Sneakers in Sneaker" :Sneakers="Sneakers" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
+        <ListSneakers class="border border-shadow-2" v-for="Sneakers in Sneaker" :Sneakers="Sneakers" />
+      </div>
       <Pagination />
     </div>
   </section>
@@ -13,9 +15,7 @@
 const client = useSupabaseClient();
 
 const { data: Sneaker } = await useAsyncData("Sneaker", async () => {
-  const { data } = await client.from("Sneaker").select("['image.small'], name, estimatedMarketValue").order("brand").range(0, 10);
+  const { data } = await client.from("Sneaker").select("['image.small'], name, estimatedMarketValue, colorway").order("brand").range(0, 11);
   return data;
 });
-
-// console.log(Sneaker.value);
 </script>
