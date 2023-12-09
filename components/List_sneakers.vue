@@ -13,7 +13,7 @@
       </div>
       <div class="product_infos flex flex-col">
         <nuxt-link :to="'/details/' + props.Sneakers.id">
-          <p class="name text-xl font-bold mt-2">{{ Sneakers.name }}</p>
+          <p class="name text-xl font-bold mt-2">{{ Sneakers.brand }} {{ Sneakers.silhouette }}</p>
           <p class="colorway text-gray-500">{{ Sneakers.colorway }}</p>
         </nuxt-link>
         <p class="price text-gray-500 font-bold mt-2">
@@ -34,7 +34,7 @@
         <button
           v-else
           @click="removeFromWishlist()"
-          class="bg-white text-red-500 mt-2 py-2 px-4 rounded-lg"
+          class="bg-white text-black mt-2 py-2 px-4 rounded-lg"
         >
           REMOVE FROM WISHLIST
         </button>

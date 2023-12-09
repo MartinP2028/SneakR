@@ -23,7 +23,7 @@ const client = useSupabaseClient();
 const { data: Sneaker } = await useAsyncData("Sneaker", async () => {
   const { data } = await client
     .from("Sneaker")
-    .select("['image.small'], name, estimatedMarketValue, colorway")
+    .select("*")
     .order("brand")
     .range(0, 11);
   return data;
