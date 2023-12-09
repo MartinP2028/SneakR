@@ -9,9 +9,9 @@
         <p class="nav_item font-bold"><a href="/wishlist">WISHLIST</a></p>
       </div>
       <div class="div_header flex justify-center items-center">
-        <router-link to="/">
+        <a href="/">
           <img class="logo w-20" src="../img/logo.png" alt="logo" />
-        </router-link>
+        </a>
       </div>
       <div class="nav_right flex justify-end items-center">
         <p class="login font-bold"><a href="/login">LOGIN</a></p>

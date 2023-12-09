@@ -2,16 +2,20 @@
   <article class="grid">
     <div class="element bg-gray-200 p-4 rounded-lg shadow-md flex flex-col">
       <div class="img w-full h-full rounded-lg">
-        <img
-          v-if="Sneakers['image.small']"
-          class="img w-full h-full rounded-lg"
-          :src="Sneakers['image.small']"
-          alt="image of sneaker"
-        />
+        <nuxt-link :to="'/details/' + props.Sneakers.id">
+          <img
+            v-if="Sneakers['image.small']"
+            class="img w-full h-full rounded-lg"
+            :src="Sneakers['image.small']"
+            alt="image of sneaker"
+          />
+        </nuxt-link>
       </div>
       <div class="product_infos flex flex-col">
-        <p class="name text-xl font-bold mt-2">{{ Sneakers.name }}</p>
-        <p class="colorway text-gray-500">{{ Sneakers.colorway }}</p>
+        <nuxt-link :to="'/details/' + props.Sneakers.id">
+          <p class="name text-xl font-bold mt-2">{{ Sneakers.name }}</p>
+          <p class="colorway text-gray-500">{{ Sneakers.colorway }}</p>
+        </nuxt-link>
         <p class="price text-gray-500 font-bold mt-2">
           ${{ Sneakers.estimatedMarketValue }}
         </p>
