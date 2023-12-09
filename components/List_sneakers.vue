@@ -21,10 +21,18 @@
           ADD TO COLLECTION
         </button>
         <button
+          v-if="!isInWishlist"
           @click="addToWishlist()"
-          class="bg-black text-white mt-4 py-2 px-4 rounded-lg"
+          class="bg-black text-white mt-2 py-2 px-4 rounded-lg"
         >
           ADD TO WISHLIST
+        </button>
+        <button
+          v-else
+          @click="removeFromWishlist()"
+          class="bg-white text-red-500 mt-2 py-2 px-4 rounded-lg"
+        >
+          REMOVE FROM WISHLIST
         </button>
       </div>
     </div>
@@ -33,8 +41,17 @@
 
 <script setup>
 const props = defineProps(["Sneakers"]);
+const isInWishlist = ref(false);
+
 function addToWishlist() {
   console.log("add to wishlist");
   console.log(props.Sneakers);
+  isInWishlist.value = true;
+}
+
+function removeFromWishlist() {
+  console.log("remove from wishlist");
+  console.log(props.Sneakers);
+  isInWishlist.value = false;
 }
 </script>
