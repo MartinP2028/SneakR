@@ -40,20 +40,20 @@
         <p>{{ Sneakers.gender }}</p>
       </div>
       <div class="mt-4">
-        <button class="bg-black text-white mr-2 py-1 px-2 rounded-lg">
+        <button class="bg-black text-white mr-2 py-1 px-2 rounded-lg hover:bg-gray-800">
           ADD TO COLLECTION
         </button>
         <button
           v-if="!isInWishlist"
           @click="addToWishlist()"
-          class="bg-black text-white mt-2 py-1 px-2 rounded-lg"
+          class="bg-black text-white mt-2 py-1 px-2 rounded-lg hover:bg-gray-800"
         >
           ADD TO WISHLIST
         </button>
         <button
           v-else
           @click="removeFromWishlist()"
-          class="bg-white text-black border border-black mt-2 py-1 px-2 rounded-lg"
+          class="bg-white text-black border border-black mt-2 py-1 px-2 rounded-lg hover:bg-gray-200"
         >
           REMOVE FROM WISHLIST
         </button>
