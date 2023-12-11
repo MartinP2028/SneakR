@@ -3,10 +3,11 @@
     <div>
       <Navbar />
       <Searchbar />
-      <p class="text-lg">vous etes sur la page details [id]</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
         <ListSneakers {{ route.params.id  }}
           class="border rounded-lg border-shadow-2"
+          v-for="Sneakers in Sneaker"
+          :Sneakers="Sneakers"
         />
       </div>
       <Pagination />
@@ -14,7 +15,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const client = useSupabaseClient();
 const route = useRoute();
 
