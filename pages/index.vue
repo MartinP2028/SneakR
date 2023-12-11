@@ -25,7 +25,7 @@ const { data: Sneaker } = await useAsyncData("Sneaker", async () => {
     .from("Sneaker")
     .select("*")
     .order("brand")
-    .range(0, 11);
+    .range(0, 23);
   return data;
 });
 </script>

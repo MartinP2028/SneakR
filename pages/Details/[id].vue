@@ -3,14 +3,13 @@
     <div>
       <Navbar />
       <Searchbar />
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
-        <ListSneakers {{ route.params.id  }}
+      <div class="grid">
+        <Detailed_sneaker {{ route.params.id  }}
           class="border rounded-lg border-shadow-2"
           v-for="Sneakers in Sneaker"
           :Sneakers="Sneakers"
         />
       </div>
-      <Pagination />
     </div>
   </section>
 </template>
