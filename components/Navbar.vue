@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar flex justify-between items-center p-4 bg-white shadow-md grid grid-cols-3 gap-4"
+      class="navbar flex justify-between items-center p-4 bg-white shadow-md grid grid-cols-1 md:grid-cols-3 gap-4"
     >
       <div class="nav_left flex justify-start items-center space-x-4">
         <p class="nav_item font-bold"><a href="/">HOME</a></p>

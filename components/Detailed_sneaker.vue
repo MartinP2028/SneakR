@@ -1,5 +1,5 @@
 <template>
-  <article class="grid grid-cols-2">
+  <article class="grid sm:grid-cols-1 lg:grid-cols-2">
     <div class="bg-gray-100 p-4 shadow-md">
       <div class="img w-full h-full rounded-lg">
         <img
@@ -40,20 +40,20 @@
         <p>{{ Sneakers.gender }}</p>
       </div>
       <div class="mt-4">
-        <button class="bg-black text-white mr-2 py-2 px-4 rounded-lg">
+        <button class="bg-black text-white mr-2 py-1 px-2 rounded-lg">
           ADD TO COLLECTION
         </button>
         <button
           v-if="!isInWishlist"
           @click="addToWishlist()"
-          class="bg-black text-white mt-2 py-2 px-4 rounded-lg"
+          class="bg-black text-white mt-2 py-1 px-2 rounded-lg"
         >
           ADD TO WISHLIST
         </button>
         <button
           v-else
           @click="removeFromWishlist()"
-          class="bg-white text-black mt-2 py-2 px-4 rounded-lg"
+          class="bg-white text-black border border-black mt-2 py-1 px-2 rounded-lg"
         >
           REMOVE FROM WISHLIST
         </button>
