@@ -8,6 +8,9 @@
             Sign in to your account
           </h2>
         </div>
+        <div v-if="errorMessage" class="text-red-500 text-center">
+          {{ errorMessage }}
+        </div>
         <div class="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" value="true" />
           <div class="rounded-md shadow-sm -space-y-px">
@@ -15,6 +18,7 @@
               <label for="email-address" class="sr-only">Email address</label>
               <input
                 id="email-address"
+                v-model="email"
                 name="email"
                 type="email"
                 autocomplete="email"
@@ -27,6 +31,7 @@
               <label for="password" class="sr-only">Password</label>
               <input
                 id="password"
+                v-model="password"
                 name="password"
                 type="password"
                 autocomplete="new-password"
@@ -41,6 +46,7 @@
             <button
               type="submit"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none hover:shadow-md"
+              @click="loginUser()"
             >
               Sign in
             </button>
@@ -62,3 +68,27 @@
     </section>
   </div>
 </template>
+
+<script setup>
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+const supabase = useSupabaseClient();
+const errorMessage = ref(null);
+
+async function loginUser() {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
+    if (error) {
+      throw error;
+    } else {
+      router.push("/");
+    }
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+}
+</script>

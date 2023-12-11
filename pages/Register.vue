@@ -8,6 +8,9 @@
             Register an account
           </h2>
         </div>
+        <div v-if="errorMessage" class="text-red-500 text-center">
+          {{ errorMessage }}
+        </div>
         <div class="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" value="true" />
           <div class="rounded-md shadow-sm -space-y-px">
@@ -66,16 +69,26 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+const router = useRouter();
 const email = ref("");
 const password = ref("");
 const supabase = useSupabaseClient();
+const errorMessage = ref(null);
+
 async function createUser() {
-  const { data, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-  });
-  console.log(data);
-  console.error(error);
+  try {
+    const { error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+    });
+    if (error) {
+      throw error;
+    } else {
+      router.push("/");
+    }
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
 }
 </script>
