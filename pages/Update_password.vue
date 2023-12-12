@@ -75,15 +75,17 @@
 const router = useRouter();
 const supabase = useSupabaseClient();
 const errorMessage = ref(null);
+const NewPassword = ref(null);
+const NewConfirmPassword = ref(null);
 
 async function resetPassword() {
-  if (NewPassword !== NewConfirmPassword) {
+  if (NewPassword.value !== NewConfirmPassword.value) {
     errorMessage.value = "Passwords do not match";
     return;
   }
   try {
     const { data, error } = await supabase.auth.updateUser({
-      password: NewPassword,
+      password: NewPassword.value,
     });
     if (error) {
       throw error;
@@ -92,6 +94,7 @@ async function resetPassword() {
       router.push("/");
     }
   } catch (error) {
+    console.log("Error updating password:", error.message);
     errorMessage.value = error.message;
   }
 }

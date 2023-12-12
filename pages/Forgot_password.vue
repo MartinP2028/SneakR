@@ -78,7 +78,7 @@ async function resetPassword() {
         if (error) {
             throw error;
         } else {
-            router.push("/update_password");
+            console.log("Password reset link sent successfully");
         }
     } catch (error) {
         errorMessage.value = error.message;
