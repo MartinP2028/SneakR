@@ -90,6 +90,7 @@ async function resetPassword() {
     if (error) {
       throw error;
     } else {
+      alert("Password updated successfully");
       console.log("Password updated successfully");
       router.push("/");
     }

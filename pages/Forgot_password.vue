@@ -78,6 +78,7 @@ async function resetPassword() {
         if (error) {
             throw error;
         } else {
+            alert("Password reset link sent successfully");
             console.log("Password reset link sent successfully");
         }
     } catch (error) {
