@@ -48,7 +48,7 @@
             <button
               type="submit"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none hover:shadow-md"
-              @click="resetPassword()"
+              @click="updatePassword()"
             >
               Reset Password
             </button>
@@ -78,7 +78,7 @@ const errorMessage = ref(null);
 const NewPassword = ref(null);
 const NewConfirmPassword = ref(null);
 
-async function resetPassword() {
+async function updatePassword() {
   if (NewPassword.value !== NewConfirmPassword.value) {
     errorMessage.value = "Passwords do not match";
     return;
