@@ -14,8 +14,70 @@
         </a>
       </div>
       <div class="nav_right flex justify-end items-center">
-        <p class="login font-bold"><a href="/login">LOGIN</a></p>
+        <UDropdown :items="items" mode="click">
+          <p class="login font-bold">ACCOUNT</p>
+          <template #item="{ item }">
+            <span :class="{
+              'truncate text-red-500': item.label === 'LogOut',
+              'truncate text-black': item.label !== 'LogOut',
+            }"
+            >
+              {{ item.label }}
+            </span>
+          </template>
+        </UDropdown>
       </div>
     </nav>
   </div>
 </template>
+
+<script setup lang="js">
+const user = useSupabaseUser();
+const supabase = useSupabaseClient();
+
+function logOut() {
+  supabase.auth.signOut();
+  reloadNuxtApp();
+}
+
+const items = user.value
+  ? [
+      [
+        {
+          label: "Log as " + user.value.email,
+        },
+      ],
+      [
+        {
+          label: "LogOut",
+          click: async () => {
+          try {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+              throw error;
+            } else {
+              console.log("logOut");
+              reloadNuxtApp();
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        },
+      ],
+    ]
+  : [
+      [
+        {
+          label: "Login",
+          to: "/login",
+        },
+      ],
+      [
+        {
+          label: "Register",
+          to: "/register",
+        },
+      ],
+    ];
+</script>
