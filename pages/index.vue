@@ -12,7 +12,9 @@
           :Sneakers="Sneakers"
         />
       </div>
-      <UPagination size="md" v-model="current_pagination" :page-count="28" :max="8" :total="49214" show-last show-first />
+      <div class="flex justify-center mt-4">
+        <UPagination size="md" v-model="current_pagination" :page-count="28" :max="8" :total="49214" show-last show-first />
+      </div>
     </div>
   </section>
 </template>
