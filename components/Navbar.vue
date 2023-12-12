@@ -35,11 +35,6 @@
 const user = useSupabaseUser();
 const supabase = useSupabaseClient();
 
-function logOut() {
-  supabase.auth.signOut();
-  reloadNuxtApp();
-}
-
 const items = user.value
   ? [
       [
