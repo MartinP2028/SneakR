@@ -5,7 +5,7 @@
             <input
                 id="name"
                 type="text"
-                placeholder="Search..."
+                placeholder="Search for a brand..."
                 required
                 class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />

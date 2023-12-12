@@ -12,20 +12,35 @@
           :Sneakers="Sneakers"
         />
       </div>
-      <Pagination />
+      <div class="flex justify-center mt-4">
+        <UPagination size="md" v-model="current_pagination" :page-count="28" :max="8" :total="49214" show-last show-first />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-const client = useSupabaseClient();
+const supabase = useSupabaseClient();
+const current_pagination = ref(1);
+const sneakersPerPage = 28;
 
 const { data: Sneaker } = await useAsyncData("Sneaker", async () => {
-  const { data } = await client
+  const { data } = await supabase
     .from("Sneaker")
     .select("*")
-    .order("brand")
-    .range(0, 11);
+    .range(current_pagination.value * sneakersPerPage - sneakersPerPage, current_pagination.value * sneakersPerPage - 1);
   return data;
 });
+
+watch(current_pagination, async () => {
+  const { data: Sneaker } = await useAsyncData("Sneaker", async () => {
+    const { data } = await supabase
+      .from("Sneaker")
+      .select("*")
+      .range(current_pagination.value * sneakersPerPage - sneakersPerPage, current_pagination.value * sneakersPerPage - 1);
+    window.scrollTo(0, 0);
+    return data;
+  });
+});
+
 </script>

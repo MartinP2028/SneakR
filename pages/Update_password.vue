@@ -5,7 +5,7 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <h2 class="mt-6 text-center text-3xl font-extrabold">
-            Register an account
+            Update Password
           </h2>
         </div>
         <div v-if="errorMessage" class="text-red-500 text-center">
@@ -15,29 +15,31 @@
           <input type="hidden" name="remember" value="true" />
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
-              <label for="email-address" class="sr-only">Email address</label>
+              <label for="password" class="sr-only">New Password</label>
               <input
-                id="email-address"
-                v-model="email"
-                name="email"
-                type="email"
-                autocomplete="email"
+                id="password"
+                v-model="NewPassword"
+                name="password"
+                type="password"
+                autocomplete="password"
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm hover:border-indigo-500 hover:shadow-md"
-                placeholder="Email address"
+                placeholder="New Password"
               />
             </div>
             <div>
-              <label for="password" class="sr-only">Password</label>
+              <label for="confirm-password" class="sr-only"
+                >Confirm Password</label
+              >
               <input
-                id="password"
-                v-model="password"
-                name="password"
+                id="confirm-password"
+                v-model="NewConfirmPassword"
+                name="confirm-password"
                 type="password"
-                autocomplete="new-password"
+                autocomplete="confirm-password"
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-sm hover:border-indigo-500 hover:shadow-md"
-                placeholder="Password"
+                placeholder="Confirm Password"
               />
             </div>
           </div>
@@ -46,16 +48,16 @@
             <button
               type="submit"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none hover:shadow-md"
-              @click="createUser()"
+              @click="updatePassword()"
             >
-              Register
+              Reset Password
             </button>
           </div>
         </div>
 
         <div class="text-sm">
           <p class="mt-2">
-            Already have an account?
+            Remembered your password ?
             <a
               href="/login"
               class="font-medium text-indigo-600 hover:text-indigo-500"
@@ -71,23 +73,29 @@
 
 <script setup>
 const router = useRouter();
-const email = ref("");
-const password = ref("");
 const supabase = useSupabaseClient();
 const errorMessage = ref(null);
+const NewPassword = ref(null);
+const NewConfirmPassword = ref(null);
 
-async function createUser() {
+async function updatePassword() {
+  if (NewPassword.value !== NewConfirmPassword.value) {
+    errorMessage.value = "Passwords do not match";
+    return;
+  }
   try {
-    const { error } = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value,
+    const { data, error } = await supabase.auth.updateUser({
+      password: NewPassword.value,
     });
     if (error) {
       throw error;
     } else {
+      alert("Password updated successfully");
+      console.log("Password updated successfully");
       router.push("/");
     }
   } catch (error) {
+    console.log("Error updating password:", error.message);
     errorMessage.value = error.message;
   }
 }
